@@ -38,6 +38,7 @@ func CollectCommands() []cli.Command {
 	commandList := make([]cli.Command, 0, 10)
 	commandList = append(commandList, commands.NewListCommand(OpenHABClient))
 	commandList = append(commandList, commands.NewSendCommand(OpenHABClient))
+	commandList = append(commandList, commands.NewStateCommand(OpenHABClient))
 
 	return commandList
 }
