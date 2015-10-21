@@ -1,4 +1,4 @@
-# openHAB cli client
+# openHAB cli client [![Build Status](https://travis-ci.org/dereulenspiegel/openhab-cli.svg?branch=master)](https://travis-ci.org/dereulenspiegel/openhab-cli)
 
 This is a simple command line client for [openHAB](http://www.openhab.org/).
 The intention is to create a client which interacts well with shell scripts and
