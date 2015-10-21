@@ -7,7 +7,8 @@ without having to open a browser or flip out the smartphone.
 
 ## Installation
 
-´go get github.com/dereulenspiegel/openhab-cli/oh´
+    go get github.com/dereulenspiegel/openhab-cli/oh
+
 
 The openHAB cli commands expect a minimal configuration in your home directory.
 You have to create the file ~/.openhab-cli with the following content:
