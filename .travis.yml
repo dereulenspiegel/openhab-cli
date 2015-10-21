@@ -1,0 +1,18 @@
+language: go
+go:
+- 1.5
+script:
+- env GOOS=linux GOARCH=amd64 go build -o oh-linux-amd64 github.com/dereulenspiegel/openhab-cli/oh
+- env GOOS=linux GOARCH=386 go build -o oh-linux-386 github.com/dereulenspiegel/openhab-cli/oh
+- env GOOS=darwin GOARCH=amd64 go build -o oh-darwin-amd64 github.com/dereulenspiegel/openhab-cli/oh
+deploy:
+  provider: releases
+  api_key:
+    secure: a79Ji889fpoubQSuEhdAC5usnyCdNXjtIhlFbjknckXKsAN3EmJOhS93yIYAGJ7sjoYFNtvYLT1oMiT/JHYuo1joyTQas5ICR43mUy+iEaXsw7LzzJbgjdb9l6KnkT3+jUt9iASd6c4rY5ZrrgO7Tr7GqWc1FFvD+A3sqZCDO92JBLNSqtAc46xWMJN0FauoFApC5tT2Pl4qdGnjp8fxAastj+nW9UDOkPF11xnCJ5GJ5Ic7VXAiuXljYwfSo2mtnaWITAEgr2Csq9J4Kf1cBAn13wxTXR5fvCGfyooKLjjndFdxH5nCTLkzsAnDC+dMgv+TIkEZ0kNyOrlx8hF5in0oeR60VC8Wu0Mi6MhiAw+m+x8MovHQZ8Zxkoo6mhZHRvEwgQM32oPu0Jj8touaIlHXXvmlrd9oAPOHd+hcyLu1ZwifVKShpn81uUGu6CSs1igvuJ9jGzEpmi9L9MM36iSTGGZJ68+JL4m+SYr4TU123EwVBwVrsn+0squQ33EJCHHMgnYHTFeEhX8cSTnEk0QyYESmH1BJNXvJwIUFlmfDKO9q3dibW5vmoQQth4uFsrQzW6oHRq70ypMw8X3P2zp5XbS+j+XQTDMhbmCUzyCFdx9IAcjV8GRG5xchrVJE3IsObbK+B844p+eHPesj3wyDSJBGTbYsAdyI1Mp5qPQ=
+  file:
+  - oh-darwin-amd64
+  - oh-linux-amd64
+  - oh-linux-386
+  on:
+    repo: dereulenspiegel/openhab-cli
+    tags: true
