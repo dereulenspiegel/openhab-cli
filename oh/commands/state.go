@@ -2,6 +2,8 @@ package commands
 
 import (
 	"fmt"
+	"regexp"
+	"strings"
 
 	"github.com/codegangsta/cli"
 	"github.com/dereulenspiegel/openhab-cli/openhab"
@@ -26,9 +28,25 @@ func (s *StateCommand) Action(c *cli.Context) {
 	if len(c.Args()) != 1 {
 		PrintStringMessageAndExit("Specify item name")
 	}
-	state, err := s.Client.GetState(c.Args()[0])
-	if err != nil {
-		PrintErrorMessageAndExit(err)
+	item := c.Args()[0]
+	if strings.Contains(item, "*") {
+		itemRegexString := strings.Replace(item, "*", ".*", -1)
+		itemRegexp := regexp.MustCompile(itemRegexString)
+
+		items, err := s.Client.ListItems()
+		if err != nil {
+			PrintErrorMessageAndExit(err)
+		}
+		for _, item := range items {
+			if itemRegexp.MatchString(item.Name) {
+				fmt.Printf("%s %s\n", item.Name, item.State)
+			}
+		}
+	} else {
+		state, err := s.Client.GetState(c.Args()[0])
+		if err != nil {
+			PrintErrorMessageAndExit(err)
+		}
+		fmt.Printf("%s\n", state)
 	}
-	fmt.Printf("%s\n", state)
 }
