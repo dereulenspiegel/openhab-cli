@@ -77,8 +77,6 @@ func (c *Client) executeRequest(req *http.Request) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	log.Printf("Response: %v", resp)
-	log.Printf("Error: %v", err)
 	body := readerToString(resp.Body)
 	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		return body, nil
